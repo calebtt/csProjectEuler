@@ -108,7 +108,6 @@ namespace csProjectEuler
             //generate prime numbers up to sqrt(PELARGENUM)
             const Int64 PELARGENUM = 600_851_475_143;
             Console.WriteLine("PE provided large number: " + PELARGENUM.ToString("N"));
-            //const Int64 PELARGENUM = 13195;
             PeSieveGenerator primeGenerator = new PeSieveGenerator(PELARGENUM);
             List<Int64> primeList = primeGenerator.GetPrimes();
             Console.Write("First few primes: ");
@@ -130,11 +129,6 @@ namespace csProjectEuler
             }
             Int64 probableResult = resultList.First();
             PrintColoredText("PE#3 ANSWER: ", probableResult);
-            //quick test for being a factor of the big number
-            Decimal resultDecimal = (Decimal)PELARGENUM / (Decimal)probableResult;
-            Console.WriteLine("Look for remainder after division with PE provided test number: " +
-                              resultDecimal.ToString("N"));
-            Console.WriteLine("Test division number: " + (Decimal)PELARGENUM / (resultDecimal - 1));
         }
 
         private static void PEProblemFour()
@@ -178,14 +172,26 @@ namespace csProjectEuler
         {
             /* 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
              What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20? */
-
+            //Implemented in C++ using the math library.
+            /*
+             * int main()
+               {
+                   std::array<int, 20> arr;
+                   std::iota(arr.begin(), arr.end(), 1);
+                   int res = std::accumulate(arr.begin(), arr.end(), 1, std::lcm<int, int>);
+                   std::cout << res;
+               }
+             */
+            //Answer: 232792560
         }
+
         static void Main(string[] args)
         {
             PEProblemOne();
             PEProblemTwo();
             PEProblemThree();
             PEProblemFour();
+            PEProblemFive();
         }
     }
 }
