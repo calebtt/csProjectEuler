@@ -30,6 +30,13 @@ namespace csProjectEuler
             Console.WriteLine(someVal);
             Console.ForegroundColor = orig;
         }
+        private static void PrintColoredText(string message, ConsoleColor col = ConsoleColor.Green)
+        {
+            ConsoleColor orig = Console.ForegroundColor;
+            Console.ForegroundColor = col;
+            Console.WriteLine(message);
+            Console.ForegroundColor = orig;
+        }
         private static void PEProblemOne()
         {
             const int MAXNUM = 1000;
@@ -132,6 +139,45 @@ namespace csProjectEuler
 
         private static void PEProblemFour()
         {
+            /* A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+             Find the largest palindrome made from the product of two 3-digit numbers. */
+            const int Max = 999;
+            const int Min = 100;
+            //Algo is probably going to have to be O(N^2), unless a math algo exists for palindromes explicitly.
+            List<int> palindromes = new();
+            int maxFound = 0;
+            int maxI = 0;
+            int maxJ = 0;
+            for (int i = Max; i >= Min; i--)
+            {
+                for (int j = Max; j >= Min; j--)
+                {
+                    int testResult = i * j;
+                    string testString = testResult.ToString();
+                    string testReverseString = new string(testResult.ToString().Reverse().ToArray());
+                    if (testString == testReverseString)
+                    {
+                        //palindromic product found.
+                        palindromes.Add(testResult);
+                        if (testResult > maxFound)
+                        {
+                            maxFound = testResult;
+                            maxI = i;
+                            maxJ = j;
+                        }
+                        //Console.WriteLine("Palindromic product found: {0}, of i:{1}, j:{2}", testResult, i, j);
+                    }
+                }
+            }
+            StringBuilder sb = new();
+            sb.AppendFormat("Max palindromic product: {0} of i:{1}, j:{2}", maxFound, maxI, maxJ);
+            PrintColoredText(sb.ToString());
+        }
+
+        private static void PEProblemFive()
+        {
+            /* 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+             What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20? */
 
         }
         static void Main(string[] args)
